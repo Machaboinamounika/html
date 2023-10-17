@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 24px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        text-align: right;
+        color: #333;
+        background-color: #f2f2f2;
+        transition: background-color 0.3s ease;
+      }
+      input[type="text"]:focus {
+        outline: none;
+        background-color: #fff;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .calculator {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+      }
+      .calculator input[type="button"] {
+        width: 100%;
+        height: 60px;
+        padding: 0;
+        font-size: 24px;
+        border: none;
+        border-radius: 5px;
+        background-color: #49adec;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+      .calculator input[type="button"]:hover {
+        background-color: #3e8e41;
+      }
+      .calculator input[type="button"].operator {
+        background-color: #ff36b9;
+      }
+      .calculator input[type="button"].operator:hover {
+        background-color: #d32f2f;
+      }
+      .calculator input[type="button"].equals {
+        background-color: #09b921;
+      }
+      .calculator input[type="button"].equals:hover {
+        background-color: #030b12;
+      }
+      .calculator input[type="button"].clear {
+        background-color: #f91500;
+      }
+      .calculator input[type="button"].clear:hover {
+        background-color: #1c940c;
+      }
+      .calculator input[type="button"]:active {
+        background-color: #295d3f;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Calculator</h1>
+      <form id="calculator-form">
+        <input type="text" id="result" readonly class="result" placeholder="0">
+        <div class="calculator">
+          <input type="button" value="7" class="number" onmousedown="addToResult('7')" onmouseup="removeActive()">
+          <input type="button" value="8" class="number" onmousedown="addToResult('8')" onmouseup="removeActive()">
+          <input type="button" value="9" class="number" onmousedown="addToResult('9')" onmouseup="removeActive()">
+          <input type="button" value="AC" class="clear" onmousedown="clearResult()" onmouseup="removeActive()">
+          <input type="button" value="4" class="number" onmousedown="addToResult('4')" onmouseup="removeActive()">
+          <input type="button" value="5" class="number" onmousedown="addToResult('5')" onmouseup="removeActive()">
+          <input type="button" value="6" class="number" onmousedown="addToResult('6')" onmouseup="removeActive()">
+          <input type="button" value="/" class="operator" onmousedown="addToResult('/')" onmouseup="removeActive()">
+          <input type="button" value="1" class="number" onmousedown="addToResult('1')" onmouseup="removeActive()">
+          <input type="button" value="2" class="number" onmousedown="addToResult('2')" onmouseup="removeActive()">
+          <input type="button" value="3" class="number" onmousedown="addToResult('3')" onmouseup="removeActive()">
+          <input type="button" value="*" class="operator" onmousedown="addToResult('*')" onmouseup="removeActive()">
+          <input type="button" value="0" class="number" onmousedown="addToResult('0')" onmouseup="removeActive()">
+          <input type="button" value="." class="number" onmousedown="addToResult('.')" onmouseup="removeActive()">
+          <input type="button" value="+" class="operator" onmousedown="addToResult('+')" onmouseup="removeActive()">
+          <input type="button" value="-" class="operator" onmousedown="addToResult('-')" onmouseup="removeActive()">
+          <input type="button" value="=" class="equals" onmousedown="calculateResult()" onmouseup="removeActive()">
+
+
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function addToResult(value) {
+        document.getElementById('result').value += value;
+        document.activeElement.blur();
+        document.getElementById('result').focus();
+        document.getElementById('result').setSelectionRange(document.getElementById('result').value.length, document.getElementById('result').value.length);
+        document.getElementById('result').scrollLeft = document.getElementById('result').scrollWidth;
+        document.getElementById('result').scrollTop = document.getElementById('result').scrollHeight;
+        document.getElementById('result').style.backgroundColor = '#f2f2f2';
+      }
+
+      function calculateResult() {
+        let result = eval(document.getElementById('result').value);
+        document.getElementById('result').value = result;
+        document.activeElement.blur();
+        document.getElementById('result').focus();
+        document.getElementById('result').setSelectionRange(document.getElementById('result').value.length, document.getElementById('result').value.length);
+        document.getElementById('result').scrollLeft = document.getElementById('result').scrollWidth;
+        document.getElementById('result').scrollTop = document.getElementById('result').scrollHeight;
+        document.getElementById('result').style.backgroundColor = '#f2f2f2';
+      }
+
+      function clearResult() {
+        document.getElementById('result').value = '';
+        document.activeElement.blur();
+        document.getElementById('result').focus();
+        document.getElementById('result').setSelectionRange(document.getElementById('result').value.length, document.getElementById('result').value.length);
+        document.getElementById('result').scrollLeft = document.getElementById('result').scrollWidth;
+        document.getElementById('result').scrollTop = document.getElementById('result').scrollHeight;
+        document.getElementById('result').style.backgroundColor = '#f2f2f2';
+      }
+
+      function removeActive() {
+        document.activeElement.blur();
+        document.getElementById('result').focus();
+        document.getElementById('result').style.backgroundColor = '#fff';
+      }
+    </script>
+  </body>
+</html>
